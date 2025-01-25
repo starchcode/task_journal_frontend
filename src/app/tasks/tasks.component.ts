@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { TasksService } from '../services/tasks.service';
+import { selectTasks } from '../store/tasks.reducer';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tasks',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
+  tasks$: Observable<any>;
 
+  constructor(private store: Store, private tasksService: TasksService) {
+    this.tasks$ = this.store.select(selectTasks);
+  }
+
+  ngOnInit(): void {
+    this.tasksService.fetchTasks();
+  }
 }

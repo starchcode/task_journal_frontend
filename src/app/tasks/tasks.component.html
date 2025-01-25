@@ -1,1 +1,6 @@
-<p>Task List</p>
+<h1>Task List</h1>
+<ul>
+  <li *ngFor="let task of tasks$ | async">
+    {{ task.title }} - {{ task.deadline }} - {{ task.is_completed ? 'Completed' : 'Pending' }}
+  </li>
+</ul>
