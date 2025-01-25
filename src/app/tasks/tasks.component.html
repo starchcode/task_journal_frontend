@@ -5,10 +5,9 @@
   <p *ngIf="error">{{ error }}</p>
 </div>
 
-<ul>
-  <li *ngFor="let task of tasks$ | async">
-    <p>{{ task.title }}</p>
-    <p>{{ task.deadline }}</p>
-    <div [innerHTML]="convertToHtml(task.description)"></div>
-  </li>
-</ul>
+<mat-list  *ngFor="let task of tasks$ | async">
+  <mat-list-item>{{ task.title }}</mat-list-item>
+  <mat-list-item> Deadline: {{ task.deadline }}</mat-list-item>
+  <mat-list-item [innerHTML]="convertToHtml(task.description)"></mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
