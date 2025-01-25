@@ -4,6 +4,10 @@ import { createAction, createFeatureSelector, createSelector, props } from '@ngr
 // Define actions
 export const loadTasksSuccess = createAction('[Tasks] Load Tasks Success', props<{ tasks: Task[] }>());
 export const loadTasksFailure = createAction('[Tasks] Load Tasks Failure', props<{ error: string }>());
+export const toggleTaskCompletion = createAction(
+  '[Tasks] Toggle Task Completion',
+  props<{ taskId: number }>()
+);
 
 // Define task interface
 export interface Task {
@@ -29,7 +33,13 @@ const initialState: TasksState = {
 export const tasksReducer = createReducer(
   initialState,
   on(loadTasksSuccess, (state, { tasks }) => ({ ...state, tasks, error: null })),
-  on(loadTasksFailure, (state, { error }) => ({ ...state, error }))
+  on(loadTasksFailure, (state, { error }) => ({ ...state, error })),
+  on(toggleTaskCompletion, (state, { taskId }) => ({
+    ...state,
+    tasks: state.tasks.map(task =>
+      task.id === taskId ? { ...task, is_completed: !task.is_completed } : task
+    )
+  }))
 );
 
 // Feature selectors

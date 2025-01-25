@@ -6,8 +6,12 @@
 </div>
 
 <mat-list  *ngFor="let task of tasks$ | async">
-  <mat-list-item>{{ task.title }}</mat-list-item>
-  <mat-list-item> Deadline: {{ task.deadline }}</mat-list-item>
+      <mat-checkbox
+        [checked]="task.is_completed"
+        (change)="toggleCompletion(task.id)"
+        >
+        {{ task.title }} | {{ task.deadline}}
+      </mat-checkbox>
   <mat-list-item [innerHTML]="convertToHtml(task.description)"></mat-list-item>
   <mat-divider></mat-divider>
 </mat-list>
