@@ -1,6 +1,13 @@
 <h1>Task List</h1>
+
+<!-- Display error message if it exists -->
+<div *ngIf="(error$ | async) as error" class="error-message">
+  <p *ngIf="error">{{ error }}</p>
+</div>
+
 <ul>
   <li *ngFor="let task of tasks$ | async">
-    {{ task.title }} - {{ task.deadline }} - {{ task.is_completed ? 'Completed' : 'Pending' }}
+    <p>{{ task.title }}</p>
+    <p>{{ task.description }}</p>
   </li>
 </ul>
