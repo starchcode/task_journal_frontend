@@ -1,3 +1,7 @@
 .paragraph {
   font-size: 2rem;
 }
+
+hr {
+  margin: 50px 0;
+}
