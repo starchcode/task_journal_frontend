@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectHeaderTitle, HeaderState } from '../store/header.reducer';
+import { selectHeaderTitle, selectHeaderCount, HeaderState, incrementHeaderCount } from '../store/header.reducer';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,8 +13,15 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   title$: Observable<string>;
+  count$: Observable<number>;
 
   constructor(private store: Store<{ header: HeaderState }>) {
     this.title$ = this.store.select(selectHeaderTitle);
+    this.count$ = this.store.select(selectHeaderCount);  // Select the count
+  }
+
+
+  onButtonClick(): void {
+    this.store.dispatch(incrementHeaderCount());  // Dispatch action to increment the count
   }
 }
