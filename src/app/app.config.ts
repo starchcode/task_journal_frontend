@@ -5,6 +5,7 @@ import { provideStore } from '@ngrx/store';
 import { headerReducer } from './store/header.reducer';
 import { provideHttpClient } from '@angular/common/http';
 import { tasksReducer } from './store/tasks.reducer';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,5 @@ export const appConfig: ApplicationConfig = {
         header: headerReducer,
         tasks: tasksReducer
       },
-    )]
+    ), provideAnimationsAsync()]
 };
