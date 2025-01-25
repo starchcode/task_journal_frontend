@@ -8,6 +8,6 @@
 <ul>
   <li *ngFor="let task of tasks$ | async">
     <p>{{ task.title }}</p>
-    <p>{{ task.description }}</p>
+    <div [innerHTML]="convertToHtml(task.description)"></div>
   </li>
 </ul>
