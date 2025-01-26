@@ -40,12 +40,15 @@ export class TasksComponent implements OnInit {
 
   toggleCompletion(task: Task): void {
     const updatedCompletion = !task.is_completed;
+
+    this.store.dispatch(toggleTaskCompletion({ taskId: task.id }));
+
     this.tasksService.updateTaskCompletion(task.id, updatedCompletion).subscribe((updatedTask) => {
-      if (updatedTask) {
+      if (!updatedTask) {
+        console.error('Task update failed');
         this.store.dispatch(toggleTaskCompletion({ taskId: task.id }));
-      } else {
-        console.error('Task update failed')
       }
     });
   }
+
 }
