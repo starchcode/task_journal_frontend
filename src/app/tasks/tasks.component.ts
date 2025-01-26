@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TasksService } from '../services/tasks.service';
-import { selectTasks, selectTasksError, Task, toggleTaskCompletion} from '../store/tasks.reducer';
+import { selectTasks, selectTasksError, Task, toggleTaskCompletion } from '../store/tasks.reducer';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { MatDividerModule } from '@angular/material/divider';
@@ -37,7 +37,14 @@ export class TasksComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(description);
   }
 
-  toggleCompletion(taskId: number): void {
-    this.store.dispatch(toggleTaskCompletion({ taskId }));
+  toggleCompletion(task: Task): void {
+    const updatedCompletion = !task.is_completed;
+    this.tasksService.updateTaskCompletion(task.id, updatedCompletion).subscribe((updatedTask) => {
+      if (updatedTask) {
+        this.store.dispatch(toggleTaskCompletion({ taskId: task.id }));
+      } else {
+        console.error('Task update failed')
+      }
+    });
   }
 }

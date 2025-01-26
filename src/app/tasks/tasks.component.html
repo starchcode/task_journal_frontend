@@ -8,7 +8,7 @@
 <mat-list  *ngFor="let task of tasks$ | async">
       <mat-checkbox
         [checked]="task.is_completed"
-        (change)="toggleCompletion(task.id)"
+        (change)="toggleCompletion(task)"
         >
         {{ task.title }} | {{ task.deadline}}
       </mat-checkbox>

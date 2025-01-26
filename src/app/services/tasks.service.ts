@@ -11,7 +11,7 @@ import { loadTasksSuccess, loadTasksFailure, Task } from '../store/tasks.reducer
 export class TasksService {
   private apiUrl = 'http://localhost:8000/tasks';
 
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(private http: HttpClient, private store: Store) { }
 
   fetchTasks(): void {
     this.http.get<Task[]>(this.apiUrl).pipe(
@@ -26,5 +26,15 @@ export class TasksService {
         return of([]);
       })
     ).subscribe();
+  }
+
+  updateTaskCompletion(taskId: number, isCompleted: boolean): Observable<Task | null> {
+    return this.http.patch<Task>(`${this.apiUrl}/${taskId}`, { is_completed: isCompleted }).pipe(
+      map((updatedTask) => updatedTask),
+      catchError((error) => {
+        console.error('Error updating task:', error);
+        return of(null);
+      })
+    );
   }
 }
