@@ -29,7 +29,7 @@ export class TaskCreateComponent {
   onSubmit(): void {
     if (this.taskForm.valid) {
       const newTask: Task = {
-        id: Date.now(), // Temporary ID, will be replaced by backend response
+        id: Date.now(),
         title: this.taskForm.value.title,
         description: this.taskForm.value.description,
         deadline: this.taskForm.value.deadline,

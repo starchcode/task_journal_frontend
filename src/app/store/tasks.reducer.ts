@@ -30,7 +30,6 @@ const initialState: TasksState = {
   error: null
 };
 
-// Create reducer
 export const tasksReducer = createReducer(
   initialState,
   on(loadTasksSuccess, (state, { tasks }) => ({ ...state, tasks, error: null })),
@@ -47,7 +46,7 @@ export const tasksReducer = createReducer(
   }))
 );
 
-// Feature selectors
+
 export const selectTasksState = createFeatureSelector<TasksState>('tasks');
 export const selectTasks = createSelector(selectTasksState, (state) => state.tasks);
 export const selectTasksError = createSelector(selectTasksState, (state) => state.error);
