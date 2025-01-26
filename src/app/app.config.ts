@@ -2,7 +2,6 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
-import { headerReducer } from './store/header.reducer';
 import { provideHttpClient } from '@angular/common/http';
 import { tasksReducer } from './store/tasks.reducer';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -14,7 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(
       {
-        header: headerReducer,
         tasks: tasksReducer
       },
     ), provideAnimationsAsync()]

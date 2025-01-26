@@ -2,7 +2,7 @@
 
 <app-task-create></app-task-create>
 
-<!-- Display error message if it exists -->
+<hr>
 <div *ngIf="(error$ | async) as error" class="error-message">
   <p *ngIf="error">{{ error }}</p>
 </div>
