@@ -8,6 +8,7 @@ export const toggleTaskCompletion = createAction(
   '[Tasks] Toggle Task Completion',
   props<{ taskId: number }>()
 );
+export const addTask = createAction('[Tasks] Add Task', props<{ task: Task }>());
 
 // Define task interface
 export interface Task {
@@ -39,6 +40,10 @@ export const tasksReducer = createReducer(
     tasks: state.tasks.map(task =>
       task.id === taskId ? { ...task, is_completed: !task.is_completed } : task
     )
+  })),
+  on(addTask, (state, { task }) => ({
+    ...state,
+    tasks: [...state.tasks, task]
   }))
 );
 

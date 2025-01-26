@@ -8,11 +8,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TaskCreateComponent } from './task-create/task-create.component'
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, MatDividerModule, MatListModule, MatCheckboxModule],
+  imports: [CommonModule, MatDividerModule, MatListModule, MatCheckboxModule, TaskCreateComponent],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
