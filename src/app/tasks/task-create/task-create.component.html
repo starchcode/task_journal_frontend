@@ -9,14 +9,9 @@
     <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Deadline</mat-label>
-    <input matInput formControlName="deadline" type="date" required />
-  </mat-form-field>
-
   <mat-form-field class="example-full-width">
-  <mat-label>Choose a date</mat-label>
-    <input matInput [min]="minDate" [matDatepicker]="picker" />
+    <mat-label>Deadline</mat-label>
+    <input matInput formControlName="deadline" [min]="minDate" [matDatepicker]="picker" required />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
