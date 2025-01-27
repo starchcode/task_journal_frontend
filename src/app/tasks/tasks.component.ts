@@ -9,11 +9,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TaskCreateComponent } from './task-create/task-create.component'
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, MatDividerModule, MatListModule, MatCheckboxModule, TaskCreateComponent],
+  imports: [CommonModule, MatDividerModule, MatListModule, MatCheckboxModule, TaskCreateComponent, MatIconModule],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })

@@ -7,3 +7,7 @@ body {
   background-color: #2e2e2e;
   color: #d3d3d3;
 }
+.fl-ct {
+  display: flex;
+  justify-content: center;
+}
