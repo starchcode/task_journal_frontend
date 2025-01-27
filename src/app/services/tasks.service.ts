@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { loadTasksSuccess, loadTasksFailure, Task } from '../store/tasks.reducer';
+import { loadTasksSuccess, loadTasksFailure, Task, addTask } from '../store/tasks.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -37,4 +37,18 @@ export class TasksService {
       })
     );
   }
+
+  createTask(task: Omit<Task, 'id' | 'is_completed'>): Observable<Task | null> {
+    return this.http.post<Task>(this.apiUrl, task).pipe(
+      map((createdTask) => {
+        this.store.dispatch(addTask({ task: createdTask }));
+        return createdTask;
+      }),
+      catchError((error) => {
+        console.error('Error creating task:', error);
+        return of(null);
+      })
+    );
+  }
+
 }

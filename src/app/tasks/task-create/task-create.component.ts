@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task-create',
@@ -29,7 +30,7 @@ export class TaskCreateComponent {
   taskForm: FormGroup;
   readonly minDate = new Date();
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(private fb: FormBuilder, private store: Store, private tasksService: TasksService) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -37,22 +38,21 @@ export class TaskCreateComponent {
     });
   }
 
+
   onSubmit(): void {
     if (this.taskForm.valid) {
-      const formattedDeadline = this.taskForm.value.deadline
-        ? new Date(this.taskForm.value.deadline).toISOString().split('T')[0]
-        : '';
-
-      const newTask: Task = {
-        id: Date.now(),
+      const newTask = {
         title: this.taskForm.value.title,
         description: this.taskForm.value.description,
-        deadline: formattedDeadline,
-        is_completed: false
+        deadline: new Date(this.taskForm.value.deadline).toISOString().split('T')[0]
       };
 
-      this.store.dispatch(addTask({ task: newTask }));
-      this.taskForm.reset();
+      this.tasksService.createTask(newTask).subscribe((createdTask) => {
+        if (createdTask) {
+          this.taskForm.reset();
+        }
+      });
     }
   }
+
 }
